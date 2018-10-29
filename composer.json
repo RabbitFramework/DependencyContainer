@@ -14,7 +14,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Xirion\\DependencyInjector\\": "src"
+            "Xirion\\DependencyInjector\\": "src",
+            "Xirion\\DependencyInjector\\Resolver\\": "src/Resolver",
+            "Xirion\\DependencyInjector\\Rule\\": "src/Rule"
         }
     }
 }
