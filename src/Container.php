@@ -39,6 +39,15 @@ class Container implements ContainerInterface
      */
     private $_classes;
 
+    public static $_instance;
+
+    public static function getInstance() {
+        if(!isset(self::$_instance)) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
+
     /**
      * Container constructor.
      */
