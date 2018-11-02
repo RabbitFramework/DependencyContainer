@@ -32,20 +32,18 @@ class Rule extends MixedBag implements RuleInterface
      * @throws \Xirion\Bags\Exceptions\BagException
      * @throws \Xirion\Bags\Exceptions\BagNotFoundException
      */
-    public function __construct(bool $singleton = false, bool $inherit = true, bool $autoResolve = true, bool $defaultConstructValue = true, array $constructParameters = [], array $call = [])
+    public function __construct(bool $singleton = false, bool $inherit = true, bool $autoResolve = true, array $constructParameters = [], array $call = [])
     {
         $this->sets([
             'singleton',
             'inherit',
             'autoResolve',
-            'useDefaultConstructValue',
             'constructParameters',
             'call'
         ], [
             $singleton,
             $inherit,
             $autoResolve,
-            $defaultConstructValue,
             $constructParameters,
             $call
         ]);
@@ -117,6 +115,7 @@ class Rule extends MixedBag implements RuleInterface
     {
         if(!$this->hasConstructParameter($parameterName)) {
             $this->constructParameters[$parameterName] = $value;
+            return $this;
         }
     }
 
@@ -126,6 +125,7 @@ class Rule extends MixedBag implements RuleInterface
     public function removeConstructParameter(string $parameterName) {
         if($this->hasConstructParameter($parameterName)) {
             unset($this->constructParameters[$parameterName]);
+            return $this;
         }
     }
 
@@ -136,7 +136,7 @@ class Rule extends MixedBag implements RuleInterface
     public function getConstructParameter(string $parameterName)
     {
         if($this->hasConstructParameter($parameterName)) {
-            return $this->constructParameters($parameterName);
+            return $this->constructParameters[$parameterName];
         }
     }
 

@@ -17,7 +17,7 @@ interface RuleInterface
 
     /**
      * @param bool $singleton
-     * @return mixed
+     * @return self
      */
     public function setSingleton(bool $singleton = false);
 
@@ -28,7 +28,7 @@ interface RuleInterface
 
     /**
      * @param bool $inherit
-     * @return mixed
+     * @return self
      */
     public function setInherit(bool $inherit = true);
 
@@ -38,19 +38,8 @@ interface RuleInterface
     public function isInherit() : bool;
 
     /**
-     * @param bool $default
-     * @return mixed
-     */
-    public function useDefaultConstructValue(bool $default = true);
-
-    /**
-     * @return bool
-     */
-    public function isUsingDefaultConstructValue() : bool;
-
-    /**
      * @param bool $resolve
-     * @return mixed
+     * @return self
      */
     public function autoResolve(bool $resolve = true);
 
@@ -62,13 +51,13 @@ interface RuleInterface
     /**
      * @param string $parameterName
      * @param $value
-     * @return mixed
+     * @return self
      */
     public function addConstructParameter(string $parameterName, $value);
 
     /**
      * @param string $parameterName
-     * @return mixed
+     * @return self
      */
     public function removeConstructParameter(string $parameterName);
 
@@ -86,13 +75,13 @@ interface RuleInterface
 
     /**
      * @param string $methodName
-     * @return mixed
+     * @return self
      */
     public function addCallMethod(string $methodName);
 
     /**
      * @param string $methodName
-     * @return mixed
+     * @return self
      */
     public function removeCallMethod(string $methodName);
 

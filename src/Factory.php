@@ -14,10 +14,18 @@ use Xirion\DependencyInjector\Rule\RuleInterface;
 class Factory
 {
 
+    /**
+     * @return ContainerInterface
+     */
     public static function makeContainer() : ContainerInterface {
         return new Container();
     }
 
+    /**
+     * @return RuleInterface
+     * @throws \Xirion\Bags\Exceptions\BagException
+     * @throws \Xirion\Bags\Exceptions\BagNotFoundException
+     */
     public static function makeRule() : RuleInterface {
         return new Rule();
     }

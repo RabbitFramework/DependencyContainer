@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "xirion/bags": "1.1.*"
+        "xirion/bags": "*"
     },
     "autoload": {
         "psr-4": {
