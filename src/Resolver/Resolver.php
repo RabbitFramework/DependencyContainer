@@ -62,7 +62,6 @@ class Resolver implements ResolverInterface
                             if($rule->isAutoResolve()) { // Check if auto resolve rule is true
                                 $constructorParameters[] = ($this->_container->hasClass($parameter->getClass()->getName())) ? $this->_container->getClass($parameter->getClass()->getName()) : $this->_container->getClass($parameter->getClass()->getName()); // if true, automatically resolve the parameters for classes
                             } else {
-                                echo $parameter->getName();
                                 if($rule->hasConstructParameter($parameter->getName())) { // else check if the constructParameter rule has the parameter included
                                     $constructorParameters[] =$rule->getConstructParameter($parameter->name); // if true then put the parameter instead of automatic resolve
                                 }
