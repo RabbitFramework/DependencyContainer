@@ -15,19 +15,12 @@ class Factory
 {
 
     /**
-     * @return ContainerInterface
-     */
-    public static function makeContainer() : ContainerInterface {
-        return new Container();
-    }
-
-    /**
      * @return RuleInterface
      * @throws \Xirion\Bags\Exceptions\BagException
      * @throws \Xirion\Bags\Exceptions\BagNotFoundException
      */
-    public static function makeRule() : RuleInterface {
-        return new Rule();
+    public static function makeRule(bool $singleton = false, bool $inherit = true, bool $autoResolve = true, array $constructParameters = [], array $call = []) : RuleInterface {
+        return new Rule($singleton, $inherit, $autoResolve, $constructParameters, $call);
     }
 
 }
