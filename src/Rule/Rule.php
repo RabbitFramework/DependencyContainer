@@ -26,7 +26,6 @@ class Rule extends MixedBag implements RuleInterface
      * @param bool $singleton
      * @param bool $inherit
      * @param bool $autoResolve
-     * @param bool $defaultConstructValue
      * @param array $constructParameters
      * @param array $call
      * @throws \Xirion\Bags\Exceptions\BagException
@@ -73,15 +72,6 @@ class Rule extends MixedBag implements RuleInterface
     public function autoResolve(bool $resolve = true)
     {
         $this->autoResolve = $resolve;
-        return $this;
-    }
-
-    /**
-     * @param bool $default
-     * @return $this
-     */
-    public function useDefaultConstructValue(bool $default = true) {
-        $this->defaultConstructValue = $default;
         return $this;
     }
 
@@ -174,13 +164,6 @@ class Rule extends MixedBag implements RuleInterface
      */
     public function isAutoResolve(): bool {
         return $this->autoResolve === true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isUsingDefaultConstructValue() : bool{
-        return $this->defaultConstructValue === true;
     }
 
 }
