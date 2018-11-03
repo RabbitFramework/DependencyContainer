@@ -79,7 +79,6 @@ class Resolver implements ResolverInterface
                         }
                     }
                 }
-                var_dump($constructorParameters);
                 return $this->_reflectedClass->newInstanceArgs($constructorParameters);
             } else {
                 return $this->_reflectedClass->newInstance();
