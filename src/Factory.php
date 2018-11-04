@@ -19,8 +19,8 @@ class Factory
      * @throws \Xirion\Bags\Exceptions\BagException
      * @throws \Xirion\Bags\Exceptions\BagNotFoundException
      */
-    public static function makeRule(bool $singleton = false, bool $inherit = true, bool $autoResolve = true, array $constructParameters = [], array $call = []) : RuleInterface {
-        return new Rule($singleton, $inherit, $autoResolve, $constructParameters, $call);
+    public static function makeRule(bool $singleton = false, bool $autoResolve = true, array $constructParameters = [], array $call = []) : RuleInterface {
+        return new Rule($singleton, $autoResolve, $constructParameters, $call);
     }
 
 }

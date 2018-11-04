@@ -27,17 +27,6 @@ interface RuleInterface
     public function isSingleton() : bool;
 
     /**
-     * @param bool $inherit
-     * @return self
-     */
-    public function setInherit(bool $inherit = true);
-
-    /**
-     * @return bool
-     */
-    public function isInherit() : bool;
-
-    /**
      * @param bool $resolve
      * @return self
      */

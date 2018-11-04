@@ -31,17 +31,15 @@ class Rule extends MixedBag implements RuleInterface
      * @throws \Xirion\Bags\Exceptions\BagException
      * @throws \Xirion\Bags\Exceptions\BagNotFoundException
      */
-    public function __construct(bool $singleton = false, bool $inherit = true, bool $autoResolve = true, array $constructParameters = [], array $call = [])
+    public function __construct(bool $singleton = false, bool $autoResolve = true, array $constructParameters = [], array $call = [])
     {
         $this->sets([
             'singleton',
-            'inherit',
             'autoResolve',
             'constructParameters',
             'call'
         ], [
             $singleton,
-            $inherit,
             $autoResolve,
             $constructParameters,
             $call
@@ -53,15 +51,6 @@ class Rule extends MixedBag implements RuleInterface
      */
     public function setSingleton(bool $singleton = false) {
         $this->singleton = $singleton;
-        return $this;
-    }
-
-    /**
-     * @param bool $inherit
-     * @return $this
-     */
-    public function setInherit(bool $inherit = true) {
-        $this->inherit = $inherit;
         return $this;
     }
 
@@ -144,14 +133,6 @@ class Rule extends MixedBag implements RuleInterface
     public function hasCallMethod(string $methodName) : bool {
         return isset($this->call[array_keys($this->call, $methodName)]);
     }
-
-    /**
-     * @return bool
-     */
-    public function isInherit() : bool {
-        return $this->inherit === true;
-    }
-
     /**
      * @return bool
      */
