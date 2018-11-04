@@ -49,7 +49,7 @@ class Resolver implements ResolverInterface
     /**
      * Methods to resolve
      */
-    public function resolveConstructor() {
+    public function resolveConstructor(array $constrParameters = []) {
         if($this->_reflectedClass->isInstantiable()) {
             $constructor = $this->_reflectedClass->getConstructor();
             if($constructor) {
@@ -62,8 +62,8 @@ class Resolver implements ResolverInterface
                             if($rule->isAutoResolve()) { // Check if auto resolve rule is true
                                 $constructorParameters[] = ($this->_container->hasClass($parameter->getClass()->getName())) ? $this->_container->getClass($parameter->getClass()->getName()) : $this->_container->getClass($parameter->getClass()->getName()); // if true, automatically resolve the parameters for classes
                             } else {
-                                if($rule->hasConstructParameter($parameter->getName())) { // else check if the constructParameter rule has the parameter included
-                                    $constructorParameters[] =$rule->getConstructParameter($parameter->name); // if true then put the parameter instead of automatic resolve
+                                if($rule->hasConstructParameter($parameter->getName()) || isset($constrParameters[$parameter->getName()])) { // else check if the constructParameter rule has the parameter included
+                                    $constructorParameters[] = (!empty($constrParameters)) ? $constrParameters[$parameter->getName()] : $rule->getConstructParameter($parameter->name); // if true then put the parameter instead of automatic resolve
                                 }
                             }
                         } else {
@@ -72,8 +72,12 @@ class Resolver implements ResolverInterface
                     } else { // else the parameter is a string or a number or a array or etc...
                         if($this->_container->hasRule($this->_reflectedClass->getName())) {
                             $rule = $this->_container->getRule($this->_reflectedClass->getName());
-                            if($rule->hasConstructParameter($parameter->getName())) {
-                                $constructorParameters[] = $rule->getConstructParameter($parameter->getName());
+                            if($rule->hasConstructParameter($parameter->getName()) || isset($constrParameters[$parameter->getName()])) {
+                                $constructorParameters[] = (!empty($constrParameters)) ? $constrParameters[$parameter->getName()] : $rule->getConstructParameter($parameter->name);
+                            }
+                        } else {
+                            if(isset($constrParameters[$parameter->getName()])) {
+                                $constructorParameters[] = $constrParameters[$parameter->getName()];
                             }
                         }
                     }

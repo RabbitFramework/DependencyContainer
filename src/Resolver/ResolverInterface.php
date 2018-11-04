@@ -26,7 +26,7 @@ interface ResolverInterface
     /**
      * @return mixed
      */
-    public function resolveConstructor();
+    public function resolveConstructor(array $constructParameters = []);
 
     /**
      * @param string $methodName
