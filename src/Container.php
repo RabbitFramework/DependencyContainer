@@ -65,6 +65,7 @@ class Container implements ContainerInterface
      */
     public function attachRule(string $className, RuleInterface $rule) {
         $this->_rules[$className] = $rule;
+        return $this;
     }
 
     /**
@@ -78,6 +79,7 @@ class Container implements ContainerInterface
                     $this->_rules[$name] = $rules[$id];
                 }
             }
+            return $this;
         }
     }
 
@@ -104,10 +106,10 @@ class Container implements ContainerInterface
      * @return mixed|object
      * @throws \ReflectionException
      */
-    public function register(string $class) {
+    public function register(string $class, array $constructParameters = []) {
         if(!$this->hasClass($class)) {
             $resolver = new Resolver($class, $this);
-            $this->_classes[$class] = $resolver->resolveConstructor();
+            $this->_classes[$class] = $resolver->resolveConstructor($constructParameters);
             if($this->isClosure($class)) {
                 if(!$this->hasClosure($class)) {
                     $this->_closures[$class] = $resolver->resolveConstructor();
@@ -116,7 +118,7 @@ class Container implements ContainerInterface
             }
             return $this->_classes[$class];
         } else {
-            return $this->getClass($class);
+            return $this->getClass($class, $constructParameters);
         }
     }
 
@@ -125,15 +127,15 @@ class Container implements ContainerInterface
      * @return mixed|object
      * @throws \ReflectionException
      */
-    public function getClass(string $className) {
+    public function getClass(string $className, array $constructParameters = []) {
         if($this->hasClass($className)) {
             $resolver = new Resolver($className, $this);
             if($this->isClosure($className)) {
                 return $this->_closures[$className];
             }
-            return $resolver->resolveConstructor();
+            return $resolver->resolveConstructor($constructParameters);
         } else {
-            return $this->register($className);
+            return $this->register($className, $constructParameters);
         }
     }
 

@@ -35,7 +35,7 @@ interface ContainerInterface
      * @param string $class
      * @return mixed
      */
-    public function register(string $class);
+    public function register(string $class, array $constructParameters = []);
 
     /**
      * @param string $className
@@ -59,6 +59,6 @@ interface ContainerInterface
      * @param string $className
      * @return mixed
      */
-    public function getClass(string $className);
+    public function getClass(string $className, array $constructParameters = []);
 
 }
