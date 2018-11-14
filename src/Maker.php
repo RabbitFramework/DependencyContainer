@@ -11,8 +11,20 @@ namespace Xirion\DependencyInjector;
 use Xirion\DependencyInjector\Rule\Rule;
 use Xirion\DependencyInjector\Rule\RuleInterface;
 
-class Factory
+class Maker
 {
+
+    /**
+     * @var array
+     */
+    public static $_instance;
+
+    public static function getInstance() {
+        if(!isset(self::$_instance)) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
 
     /**
      * @return RuleInterface

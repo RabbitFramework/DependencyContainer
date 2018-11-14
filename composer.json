@@ -17,6 +17,7 @@
             "Xirion\\DependencyInjector\\": "src",
             "Xirion\\DependencyInjector\\Resolver\\": "src/Resolver",
             "Xirion\\DependencyInjector\\Rule\\": "src/Rule"
-        }
+        },
+        "files": ["src/Utilities.php"]
     }
 }

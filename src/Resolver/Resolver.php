@@ -67,7 +67,7 @@ class Resolver implements ResolverInterface
                                 }
                             }
                         } else {
-                            $constructorParameters[] = $this->_container->register($parameter->getClass()->getName()); // else if the class doesn't have rule, automatically resolve the parameter
+                            $constructorParameters[] = (isset($constrParameters[$parameter->getName()])) ? $constrParameters[$parameter->getName()] : $this->_container->register($parameter->getClass()->getName()); // else if the class doesn't have rule, automatically resolve the parameter
                         }
                     } else { // else the parameter is a string or a number or a array or etc...
                         if($this->_container->hasRule($this->_reflectedClass->getName())) {
