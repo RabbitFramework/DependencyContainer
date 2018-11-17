@@ -1,0 +1,23 @@
+{
+    "name": "xirion/dependency-injector",
+    "description": "Dependency injector component of xirion framework",
+    "type": "component",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kaktus",
+            "email": "kaktus@xirion.fr"
+        }
+    ],
+    "require": {
+        "xirion/bags": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xirion\\DependencyInjector\\": "src",
+            "Xirion\\DependencyInjector\\Resolver\\": "src/Resolver",
+            "Xirion\\DependencyInjector\\Rule\\": "src/Rule"
+        },
+        "files": ["src/Utilities.php"]
+    }
+}
