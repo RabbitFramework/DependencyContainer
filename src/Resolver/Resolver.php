@@ -2,106 +2,151 @@
 /**
  * Created by PhpStorm.
  * User: Admin
- * Date: 24/10/2018
- * Time: 12:11
+ * Date: 15/11/2018
+ * Time: 17:56
  */
 
 namespace Xirion\DependencyInjector\Resolver;
 
+use Psr\Container\ContainerInterface;
+use Xirion\DependencyInjector\DepedencyContainerInterface;
 
-use Xirion\DependencyInjector\ContainerInterface;
-
-/**
- * Class Resolver
- * @package Xirion\DependencyInjector\Resolver
- */
-class Resolver implements ResolverInterface
+class Resolver
 {
 
     /**
-     * @var \ReflectionClass
+     * @var ReflectionClass
      */
-    private $_reflectedClass;
+    protected $_reflectionClass;
+
     /**
-     * @var ContainerInterface
+     * @var DepedencyContainerInterface
      */
-    private $_container;
+    protected $_container;
+
+    /**
+     * @var string
+     */
+    protected $_className;
 
     /**
      * Resolver constructor.
      * @param string $class
-     * @param ContainerInterface $container
+     * @param DepedencyContainerInterface $container
      * @throws \ReflectionException
      */
-    public function __construct(string $class, ContainerInterface $container)
+    public function __construct(string $class, DepedencyContainerInterface $container)
     {
-        $this->_reflectedClass = new \ReflectionClass($class);
+        $this->_reflectionClass = self::getReflectionClass($class);
+        $this->_className = $class;
         $this->_container = $container;
     }
 
-    /**
-     *
-     */
-    public function getNewInstance() {
 
+    /**
+     * @param string $class
+     * @return \ReflectionClass
+     * @throws \ReflectionException
+     */
+    public static function getReflectionClass(string $class) {
+        return new \ReflectionClass($class);
     }
 
     /**
-     * Methods to resolve
+     * @return mixed
      */
-    public function resolveConstructor(array $constrParameters = []) {
-        if($this->_reflectedClass->isInstantiable()) {
-            $constructor = $this->_reflectedClass->getConstructor();
-            if($constructor) {
-                $parameters = $constructor->getParameters();
-                $constructorParameters = [];
-                foreach ($parameters as $parameter) {
-                    if($parameter->getClass()) { // check if the current eached parameter is a class
-                        if($this->_container->hasRule($this->_reflectedClass->getName())) { // Check if the class has the rule
-                            $rule = $this->_container->getRule($this->_reflectedClass->getName()); // If has, get the rule
-                            if($rule->isAutoResolve()) { // Check if auto resolve rule is true
-                                $constructorParameters[] = ($this->_container->hasClass($parameter->getClass()->getName())) ? $this->_container->getClass($parameter->getClass()->getName()) : $this->_container->getClass($parameter->getClass()->getName()); // if true, automatically resolve the parameters for classes
-                            } else {
-                                if($rule->hasConstructParameter($parameter->getName()) || isset($constrParameters[$parameter->getName()])) { // else check if the constructParameter rule has the parameter included
-                                    $constructorParameters[] = (!empty($constrParameters)) ? $constrParameters[$parameter->getName()] : $rule->getConstructParameter($parameter->name); // if true then put the parameter instead of automatic resolve
-                                }
-                            }
-                        } else {
-                            $constructorParameters[] = (isset($constrParameters[$parameter->getName()])) ? $constrParameters[$parameter->getName()] : $this->_container->register($parameter->getClass()->getName()); // else if the class doesn't have rule, automatically resolve the parameter
-                        }
-                    } else { // else the parameter is a string or a number or a array or etc...
-                        if($this->_container->hasRule($this->_reflectedClass->getName())) {
-                            $rule = $this->_container->getRule($this->_reflectedClass->getName());
-                            if($rule->hasConstructParameter($parameter->getName()) || isset($constrParameters[$parameter->getName()])) {
-                                $constructorParameters[] = (!empty($constrParameters)) ? $constrParameters[$parameter->getName()] : $rule->getConstructParameter($parameter->name);
-                            }
-                        } else {
-                            if(isset($constrParameters[$parameter->getName()])) {
-                                $constructorParameters[] = $constrParameters[$parameter->getName()];
-                            }
-                        }
-                    }
-                }
-                return $this->_reflectedClass->newInstanceArgs($constructorParameters);
-            } else {
-                return $this->_reflectedClass->newInstance();
-            }
+    public function getConstructor() {
+        if($this->hasConstructor()) {
+            return $this->_reflectionClass->getConstructor();
         }
     }
 
     /**
-     * @param string $methodName
-     * @return mixed|void
+     * @return int
      */
-    public function resolveMethod(string $methodName) {
-
+    public function getConstructorParameterCount() {
+        if($this->hasConstructor()) {
+            return count($this->getConstructor()->getParameters());
+        }
     }
 
     /**
-     * Methods to check if has
+     * @return mixed
      */
-    public function hasMethod(string $methodName) : bool {
-        return $this->_reflectedClass->hasMethod($methodName);
+    public function getConstructorParameters() {
+        if($this->hasConstructor()) {
+            return $this->getConstructor()->getParameters();
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getConstructorParameterBaseValues() {
+        if($this->hasConstructor()) {
+            $parameters = [];
+            foreach ($this->getConstructorParameters() as $parameter) {
+                $parameters[$parameter->getName()] = ($parameter->isDefaultValueAvailable()) ? $parameter->getDefaultValue() : null;
+            }
+            return $parameters;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasConstructor() {
+        return !empty($this->_reflectionClass->getConstructor());
+    }
+
+    /**
+     * @param string $methodName
+     * @return mixed
+     */
+    public function getMethod(string $methodName) {
+        return $this->_reflectionClass->getMethod($methodName);
+    }
+
+    /**
+     * @param string $method
+     * @return int
+     */
+    public function getMethodParameterCount(string $method) {
+        if ($this->hasMethod($method)) {
+            return count($this->getMethod($method)->getParameters());
+        }
+    }
+
+    /**
+     * @param string $method
+     * @return mixed
+     */
+    public function getMethodParameters(string $method) {
+        if($this->hasMethod($method)) {
+            return $this->getMethod($method)->getParameters();
+        }
+    }
+
+    /**
+     * @param string $method
+     * @return array
+     */
+    public function getMethodParameterBaseValues(string $method) {
+        if($this->hasMethod($method)) {
+            $parameters = [];
+            foreach ($this->getMethodParameters($method) as $parameter) {
+                $parameters[] = $parameter->getDefaultValue();
+            }
+            return $parameters;
+        }
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function hasMethod(string $name) {
+        return $this->_reflectionClass->getMethod($name);
     }
 
 }
