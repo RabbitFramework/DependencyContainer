@@ -36,12 +36,32 @@ class DependencyContainer implements DepedencyContainerInterface
     /**
      * @var array
      */
+    private $_classAliases = [];
+
+    /**
+     * @var array
+     */
     private $_methodResolvers = [];
 
     /**
      * @var
      */
     private $_closures;
+
+    /**
+     * @var
+     */
+    public static $_instance;
+
+    /**
+     * @return DependencyContainer
+     */
+    public static function getInstance() {
+        if(!isset(self::$_instance)) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
 
 
     /**
@@ -52,7 +72,11 @@ class DependencyContainer implements DepedencyContainerInterface
      * @throws \ReflectionException
      */
     public function register(string $className, array $parameters = [], $rule = []) {
-        if(!$this->hasClassResolver($className)) {
+        if(!$this->hasClassResolver($className))
+        {
+            if(array_key_exists($className, $this->_classAliases)) {
+                $className = $this->_classAliases[$className];
+            }
             $this->_classResolvers[$className] = new ConstructorResolver($className, $this);
             if(!empty($rule)) $this->attachClassRule($className, $rule);
             if(isset($this->_classRules[$className]) && isset($this->_classRules[$className]['singleton']) && $this->_classRules[$className]['singleton'] === true) {
@@ -74,6 +98,7 @@ class DependencyContainer implements DepedencyContainerInterface
      */
     public function getClass(string $className, array $parameters = [], $rule = []) {
         if($this->hasClassResolver($className)) {
+            if(array_key_exists($className, $this->_classAliases)) $className = $this->_classAliases[array_search($className, $this->_classAliases)];
             if(!empty($rule)) $this->attachClassRule($className, $rule);
             if(isset($this->_classRules[$className]) && isset($this->_classRules[$className]['singleton']) && $this->_classRules[$className]['singleton'] === true)
                 return $this->_closures[$className];
@@ -83,6 +108,22 @@ class DependencyContainer implements DepedencyContainerInterface
         }
     }
 
+
+    /**
+     * @param string $className
+     * @param string $alias
+     */
+    public function setAlias(string $className, string $alias) {
+        $this->_classAliases[$alias] = $className;
+        return $this;
+    }
+
+    public function setAliases(string $className, array $aliases) {
+        foreach ($aliases as $alias) {
+            $this->_classAliases[$alias] = $className;
+        }
+        return $this;
+    }
 
     /**
      * @param string $class
@@ -155,6 +196,7 @@ class DependencyContainer implements DepedencyContainerInterface
             $this->_classRules[$className] = $rule;
         }
         $this->_classRules[$className] = array_replace($this->_classRules[$className], $rule);
+        return $this;
     }
 
     /**
@@ -187,6 +229,7 @@ class DependencyContainer implements DepedencyContainerInterface
             $this->_methodRules[$className][$methodName] = $rule;
         }
         $this->_methodRules[$className][$methodName] = array_replace($this->_methodRules[$className][$methodName], $rule);
+        return $this;
     }
 
     /**
