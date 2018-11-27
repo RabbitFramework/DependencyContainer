@@ -6,12 +6,12 @@
  * Time: 10:30
  */
 
-namespace Xirion\DependencyInjector\Entities;
+namespace Rabbit\DependencyInjector\Entities;
 
-use Xirion\DependencyInjector\DependencyContainerInterface;
-use Xirion\DependencyInjector\Entities\Information\ClassInformation;
-use Xirion\DependencyInjector\Entities\Information\EntityInformationInterface;
-use Xirion\DependencyInjector\Entities\Resolver\ClassResolver;
+use Rabbit\DependencyInjector\DependencyContainerInterface;
+use Rabbit\DependencyInjector\Entities\Information\ClassInformation;
+use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyInjector\Entities\Resolver\ClassResolver;
 
 class ClassEntity implements EntityInterface
 {

@@ -6,8 +6,7 @@
  * Time: 14:06
  */
 
-namespace Xirion\DependencyInjector\Entities;
-
+namespace Rabbit\DependencyInjector\Entities;
 
 class EntityException extends \Exception
 {

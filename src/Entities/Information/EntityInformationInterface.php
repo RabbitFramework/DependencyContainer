@@ -6,8 +6,7 @@
  * Time: 17:52
  */
 
-namespace Xirion\DependencyInjector\Entities\Information;
-
+namespace Rabbit\DependencyInjector\Entities\Information;
 
 interface EntityInformationInterface
 {

@@ -6,7 +6,7 @@
  * Time: 13:59
  */
 
-namespace Xirion\DependencyInjector;
+namespace Rabbit\DependencyInjector;
 
 
 class DependencyContainerException extends \Exception

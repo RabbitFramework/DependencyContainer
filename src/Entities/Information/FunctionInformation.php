@@ -6,8 +6,7 @@
  * Time: 21:27
  */
 
-namespace Xirion\DependencyInjector\Entities\Information;
-
+namespace Rabbit\DependencyInjector\Entities\Information;
 
 class FunctionInformation
 {

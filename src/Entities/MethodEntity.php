@@ -6,12 +6,12 @@
  * Time: 10:32
  */
 
-namespace Xirion\DependencyInjector\Entities;
+namespace Rabbit\DependencyInjector\Entities;
 
-use \Xirion\DependencyInjector\DependencyContainerInterface;
-use Xirion\DependencyInjector\Entities\Information\EntityInformationInterface;
-use Xirion\DependencyInjector\Entities\Information\MethodInformation;
-use Xirion\DependencyInjector\Entities\Resolver\MethodResolver;
+use Rabbit\DependencyInjector\DependencyContainerInterface;
+use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyInjector\Entities\Information\MethodInformation;
+use Rabbit\DependencyInjector\Entities\Resolver\MethodResolver;
 
 class MethodEntity implements EntityInterface
 {

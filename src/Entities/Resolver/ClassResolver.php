@@ -6,10 +6,10 @@
  * Time: 10:31
  */
 
-namespace Xirion\DependencyInjector\Entities\Resolver;
+namespace Rabbit\DependencyInjector\Entities\Resolver;
 
 use \ReflectionClass;
-use Xirion\DependencyInjector\Entities\EntityInterface;
+use Rabbit\DependencyInjector\Entities\EntityInterface;
 
 class ClassResolver
 {

@@ -6,10 +6,9 @@
  * Time: 17:52
  */
 
-namespace Xirion\DependencyInjector\Entities;
+namespace Rabbit\DependencyInjector\Entities;
 
-
-use Xirion\DependencyInjector\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
 
 interface EntityInterface
 {

@@ -6,7 +6,7 @@
  * Time: 10:32
  */
 
-namespace Xirion\DependencyInjector\Entities\Information;
+namespace Rabbit\DependencyInjector\Entities\Information;
 
 class MethodInformation implements EntityInformationInterface
 {

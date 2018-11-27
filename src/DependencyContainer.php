@@ -6,10 +6,9 @@
  * Time: 08:46
  */
 
-namespace Xirion\DependencyInjector;
+namespace Rabbit\DependencyInjector;
 
-
-use Xirion\DependencyInjector\Entities\ClassEntity;
+use Rabbit\DependencyInjector\Entities\ClassEntity;
 
 class DependencyContainer implements DependencyContainerInterface
 {
