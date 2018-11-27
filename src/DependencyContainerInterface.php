@@ -6,10 +6,10 @@
  * Time: 18:50
  */
 
-namespace Xirion\DependencyInjector\Rule;
+namespace Xirion\DependencyInjector;
 
 
-interface RuleInterface
+interface DependencyContainerInterface
 {
 
 }
