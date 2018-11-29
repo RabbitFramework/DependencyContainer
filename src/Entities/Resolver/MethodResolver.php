@@ -6,9 +6,9 @@
  * Time: 10:31
  */
 
-namespace Rabbit\DependencyInjector\Entities\Resolver;
+namespace Rabbit\DependencyContainer\Entities\Resolver;
 
-use Rabbit\DependencyInjector\Entities\EntityInterface;
+use Rabbit\DependencyContainer\Entities\EntityInterface;
 
 class MethodResolver
 {

@@ -6,14 +6,14 @@
  * Time: 10:32
  */
 
-namespace Rabbit\DependencyInjector\Entities;
+namespace Rabbit\DependencyContainer\Entities;
 
 use Psr\Container\ContainerInterface;
-use Rabbit\DependencyInjector\DependencyContainerException;
-use Rabbit\DependencyInjector\DependencyContainerInterface;
-use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
-use Rabbit\DependencyInjector\Entities\Information\MethodInformation;
-use Rabbit\DependencyInjector\Entities\Resolver\MethodResolver;
+use Rabbit\DependencyContainer\DependencyContainerException;
+use Rabbit\DependencyContainer\DependencyContainerInterface;
+use Rabbit\DependencyContainer\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyContainer\Entities\Information\MethodInformation;
+use Rabbit\DependencyContainer\Entities\Resolver\MethodResolver;
 
 class MethodEntity implements EntityInterface
 {

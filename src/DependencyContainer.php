@@ -6,11 +6,11 @@
  * Time: 08:46
  */
 
-namespace Rabbit\DependencyInjector;
+namespace Rabbit\DependencyContainer;
 
 use Psr\Container\ContainerInterface;
-use Rabbit\DependencyInjector\Entities\ClassEntity;
-use Xirion\DependencyInjector\DependencyContainerNotFoundException;
+use Rabbit\DependencyContainer\Entities\ClassEntity;
+use Xirion\DependencyContainer\DependencyContainerNotFoundException;
 
 class DependencyContainer implements ContainerInterface
 {

@@ -6,7 +6,7 @@
  * Time: 10:32
  */
 
-namespace Rabbit\DependencyInjector\Entities\Information;
+namespace Rabbit\DependencyContainer\Entities\Information;
 
 class MethodInformation implements EntityInformationInterface
 {

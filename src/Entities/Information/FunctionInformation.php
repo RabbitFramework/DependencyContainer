@@ -6,7 +6,7 @@
  * Time: 21:27
  */
 
-namespace Rabbit\DependencyInjector\Entities\Information;
+namespace Rabbit\DependencyContainer\Entities\Information;
 
 class FunctionInformation
 {

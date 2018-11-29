@@ -14,8 +14,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Rabbit\\DependencyInjector\\": "src",
-            "Rabbit\\DependencyInjector\\Entities\\": "src/Entities"
+            "Rabbit\\DependencyContainer\\": "src",
+            "Rabbit\\DependencyContainer\\Entities\\": "src/Entities"
         }
     }
 }

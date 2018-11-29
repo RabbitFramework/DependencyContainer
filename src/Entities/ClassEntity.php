@@ -6,13 +6,13 @@
  * Time: 10:30
  */
 
-namespace Rabbit\DependencyInjector\Entities;
+namespace Rabbit\DependencyContainer\Entities;
 
 use Psr\Container\ContainerInterface;
-use Rabbit\DependencyInjector\Entities\Information\ClassInformation;
-use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
-use Rabbit\DependencyInjector\Entities\Resolver\ClassResolver;
-use Xirion\DependencyInjector\DependencyContainerNotFoundException;
+use Rabbit\DependencyContainer\Entities\Information\ClassInformation;
+use Rabbit\DependencyContainer\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyContainer\Entities\Resolver\ClassResolver;
+use Xirion\DependencyContainer\DependencyContainerNotFoundException;
 
 class ClassEntity implements EntityInterface
 {

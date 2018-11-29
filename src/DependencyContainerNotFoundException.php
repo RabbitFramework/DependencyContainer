@@ -6,7 +6,7 @@
  * Time: 18:04
  */
 
-namespace Xirion\DependencyInjector;
+namespace Xirion\DependencyContainer;
 
 
 use Psr\Container\NotFoundExceptionInterface;
