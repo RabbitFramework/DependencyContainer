@@ -3,6 +3,9 @@
     "description": "Dependency injector component of rabbitphp framework",
     "type": "component",
     "license": "MIT",
+    "require": {
+        "psr/container": "*"
+    },
     "authors": [
         {
             "name": "Kaktus",

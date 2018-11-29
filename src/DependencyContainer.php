@@ -8,9 +8,11 @@
 
 namespace Rabbit\DependencyInjector;
 
+use Psr\Container\ContainerInterface;
 use Rabbit\DependencyInjector\Entities\ClassEntity;
+use Xirion\DependencyInjector\DependencyContainerNotFoundException;
 
-class DependencyContainer implements DependencyContainerInterface
+class DependencyContainer implements ContainerInterface
 {
 
     private $_classEntities = [];
@@ -34,20 +36,19 @@ class DependencyContainer implements DependencyContainerInterface
         unset($this->_classAliases[$alias]);
     }
 
-    public function getClass(string $className) : ClassEntity {
-        if(!$this->hasClass($className)) {
+    public function get($className) : ClassEntity {
+        if(!$this->has($className)) {
             if(array_key_exists($className, $this->_classAliases)) $className = $this->_classAliases[$className];
             try {
                 $this->_classEntities[$className] = new ClassEntity(new \ReflectionClass($className), $this);
             } catch (\ReflectionException $e) {
-                throw new DependencyContainerException("DependencyContainer => getClass; Error from ReflectionClass, class $className doesn't existss");
+                throw new DependencyContainerNotFoundException("[Rabbit => DependencyContainer::get()] The class $className doesn't exists");
             }
         }
         return $this->_classEntities[$className];
     }
 
-    public function hasClass(string $className) {
+    public function has($className) {
         return isset($this->_classEntities[$className]);
     }
-
 }

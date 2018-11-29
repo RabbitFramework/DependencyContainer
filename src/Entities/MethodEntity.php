@@ -8,6 +8,8 @@
 
 namespace Rabbit\DependencyInjector\Entities;
 
+use Psr\Container\ContainerInterface;
+use Rabbit\DependencyInjector\DependencyContainerException;
 use Rabbit\DependencyInjector\DependencyContainerInterface;
 use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
 use Rabbit\DependencyInjector\Entities\Information\MethodInformation;
@@ -29,7 +31,7 @@ class MethodEntity implements EntityInterface
 
     private $_parentClass;
 
-    public function __construct(\ReflectionMethod $method, DependencyContainerInterface $container, ClassEntity $classEntity)
+    public function __construct(\ReflectionMethod $method, ContainerInterface $container, ClassEntity $classEntity)
     {
         $this->_parentEntity = $classEntity;
 
@@ -51,7 +53,7 @@ class MethodEntity implements EntityInterface
 
     public function execute(array $parameters = [], object $class = null) {
         if(!isset($this->_parentClass) && !isset($class)) {
-            throw new EntityException('MethodEntity => execute; the parent class doesn\'t exists, please invoke first before execute a method');
+            throw new DependencyContainerException('[Rabbit => DependencyContainer->MethodEntity::execute()] the parent class doesn\'t exists, please invoke first before execute a method');
         }
         return $this->resolver->invoke($this->_parentClass ?? $class, $parameters);
     }

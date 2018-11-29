@@ -43,14 +43,14 @@ class ClassResolver
             $constructorParameters = [];
             foreach ($crParameters as $key => $parameter) {
                 if(isset($this->_entity->getRule()['inherit']) && $this->_entity->getRule()['inherit'] === true) {
-                    $this->_entity->container->getClass($parameter->getClass()->getName())->setRule($this->_entity->getRule());
+                    $this->_entity->container->get($parameter->getClass()->getName())->setRule($this->_entity->getRule());
                 }
                 $constructorParameters[] = ((isset($optParameters[$parameter->getName()]))
                     ? $optParameters[$parameter->getName()]
                     : (isset($this->_entity->getRule()['constructParameters']) && isset($this->_entity->getClassRule()['constructParameters'][$parameter->getName()])
                         ? $this->_entity->getRule()['constructParameters'][$parameter->getName()]
                         : ($parameter->getClass()
-                            ? $this->_entity->container->getClass($parameter->getClass()->getName())->getInstance()
+                            ? $this->_entity->container->get($parameter->getClass()->getName())->getInstance()
                             : ($parameter->isDefaultValueAvailable()
                                 ? $parameter->getDefaultValue()
                                 : null))));

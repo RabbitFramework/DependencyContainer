@@ -8,10 +8,11 @@
 
 namespace Rabbit\DependencyInjector\Entities;
 
-use Rabbit\DependencyInjector\DependencyContainerInterface;
+use Psr\Container\ContainerInterface;
 use Rabbit\DependencyInjector\Entities\Information\ClassInformation;
 use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
 use Rabbit\DependencyInjector\Entities\Resolver\ClassResolver;
+use Xirion\DependencyInjector\DependencyContainerNotFoundException;
 
 class ClassEntity implements EntityInterface
 {
@@ -32,7 +33,7 @@ class ClassEntity implements EntityInterface
 
     private $_reflectionClass;
 
-    public function __construct(\ReflectionClass $className, DependencyContainerInterface $container)
+    public function __construct(\ReflectionClass $className, ContainerInterface $container)
     {
         $this->_reflectionClass = $className;
 
@@ -67,12 +68,12 @@ class ClassEntity implements EntityInterface
                 try {
                     $this->_methodEntities[$methodName] = new MethodEntity(new \ReflectionMethod($this->information->name, $methodName), $this->container, $this);
                 } catch (\ReflectionException $e) {
-
+                    throw new DependencyContainerNotFoundException("[Rabbit => DependencyContainer->ClassEntity::getMethod()] The method $methodName doesn't exists");
                 }
             }
             return $this->_methodEntities[$methodName];
         } else {
-
+            throw new DependencyContainerNotFoundException("[Rabbit => DependencyContainer->ClassEntity::getMethod()] The method $methodName doesn't exists");
         }
     }
 

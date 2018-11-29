@@ -8,8 +8,9 @@
 
 namespace Rabbit\DependencyInjector;
 
+use Psr\Container\ContainerExceptionInterface;
 
-class DependencyContainerException extends \Exception
+class DependencyContainerException extends \Exception implements ContainerExceptionInterface
 {
 
 }
