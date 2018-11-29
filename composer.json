@@ -1,6 +1,6 @@
 {
-    "name": "rabbitphp/dependency-injector",
-    "description": "Dependency injector component of rabbitphp framework",
+    "name": "rabbitphp/dependency-container",
+    "description": "Dependency container component of rabbitphp framework",
     "type": "component",
     "license": "MIT",
     "require": {
