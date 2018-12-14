@@ -17,9 +17,9 @@ class MethodInformation implements EntityInformationInterface
         $this->_reflectionMethod = $method;
         $this->name = $this->_reflectionMethod->getName();
         $this->parentClass = $this->_reflectionMethod->class;
-        $this->namespace = ($this->hasNamespace()) ? $this->_reflectionMethod->getNamespaceName() : null;
-        $this->parameters = ($this->hasParameters()) ? $this->_reflectionMethod->getParameters() : null;
-        $this->staticParameters = ($this->hasParameters()) ? $this->_reflectionMethod->getStaticVariables() : null;
+        $this->namespace = ($this->hasNamespace()) ? $this->_reflectionMethod->getNamespaceName() : '';
+        $this->parameters = ($this->hasParameters()) ? $this->_reflectionMethod->getParameters() : [];
+        $this->staticParameters = ($this->hasParameters()) ? $this->_reflectionMethod->getStaticVariables() : [];
         $this->fileName = $this->_reflectionMethod->getFileName();
     }
 

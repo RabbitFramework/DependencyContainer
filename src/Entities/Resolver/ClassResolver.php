@@ -11,7 +11,7 @@ namespace Rabbit\DependencyContainer\Entities\Resolver;
 use \ReflectionClass;
 use Rabbit\DependencyContainer\Entities\EntityInterface;
 
-class ClassResolver
+class ClassResolver implements EntityResolverInterface
 {
 
     /**
@@ -37,7 +37,7 @@ class ClassResolver
      * @param array $optParameters
      * @return array
      */
-    public function resolveConstructor(array $optParameters = []) {
+    public function resolve(array $optParameters = []) : array {
         if($this->_entity->getInformation()->hasConstructor()) {
             $crParameters = $this->_entity->getInformation()->constructor->parameters;
             $constructorParameters = [];
@@ -65,9 +65,9 @@ class ClassResolver
      * @param array $parameters
      * @return object
      */
-    public function getInstance(array $parameters = []) {
+    public function get(array $parameters = []) {
         if($this->_entity->getInformation()->isInstantiable()) {
-            $class = $this->_reflectionClass->newInstanceArgs($this->resolveConstructor($parameters));
+            $class = $this->_reflectionClass->newInstanceArgs($this->resolve($parameters));
             if(isset($this->_entity->getRule()['call'])) {
                 foreach ($this->_entity->getRule()['call'] as $method => $parameter) {
                     if($this->_entity->getInformation()->hasMethod(!is_int($method) ? $method : $parameter)) {

@@ -80,12 +80,12 @@ class ClassEntity implements EntityInterface
     public function getInstance(array $parameters = []) {
         if(isset($this->_classRule['singleton']) && $this->_classRule['singleton'] === true) {
             if(!isset($this->singleInstance)) {
-                $this->_lastClass = $this->resolver->getInstance($parameters);
+                $this->_lastClass = $this->resolver->get($parameters);
                 $this->singleInstance = $this->_lastClass;
             }
             return $this->singleInstance;
         }
-        $this->_lastClass = $this->resolver->getInstance($parameters);
+        $this->_lastClass = $this->resolver->get($parameters);
         return $this->_lastClass;
     }
 

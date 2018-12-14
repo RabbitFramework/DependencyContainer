@@ -10,7 +10,7 @@ namespace Rabbit\DependencyContainer\Entities\Resolver;
 
 use Rabbit\DependencyContainer\Entities\EntityInterface;
 
-class MethodResolver
+class MethodResolver implements EntityResolverInterface
 {
 
     /**
@@ -22,13 +22,27 @@ class MethodResolver
      */
     private $_entity;
 
+    /**
+     * @var object
+     */
+    private $_class;
+
+    /**
+     * MethodResolver constructor.
+     * @param \ReflectionMethod $method
+     * @param EntityInterface $entity
+     */
     public function __construct(\ReflectionMethod $method, EntityInterface $entity)
     {
         $this->_reflectionMethod = $method;
         $this->_entity = $entity;
     }
 
-    public function resolveMethod(array $optParameters = []) {
+    /**
+     * @param array $optParameters
+     * @return array
+     */
+    public function resolve(array $optParameters = []) : array {
         if($this->_entity->getInformation()->parameters) {
             $meParameters = $this->_entity->getInformation()->parameters;
             $methodParameters = [];
@@ -52,8 +66,18 @@ class MethodResolver
         }
     }
 
-    public function invoke($class, array $optParameters = []) {
-        return $this->_reflectionMethod->invokeArgs($class, $this->resolveMethod($optParameters));
+    public function setClass($class) {
+        $this->_class = $class;
+        return $this;
+    }
+
+    /**
+     * @param $class
+     * @param array $optParameters
+     * @return mixed
+     */
+    public function get(array $optParameters = []) {
+        return $this->_reflectionMethod->invokeArgs($this->_class, $this->resolve($optParameters));
     }
 
 }
