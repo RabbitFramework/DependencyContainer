@@ -10,7 +10,6 @@ namespace Rabbit\DependencyContainer;
 
 use Psr\Container\ContainerInterface;
 use Rabbit\DependencyContainer\Entities\ClassEntity;
-use Xirion\DependencyContainer\DependencyContainerNotFoundException;
 
 class DependencyContainer implements ContainerInterface
 {

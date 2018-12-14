@@ -6,8 +6,7 @@
  * Time: 18:04
  */
 
-namespace Xirion\DependencyContainer;
-
+namespace Rabbit\DependencyContainer;
 
 use Psr\Container\NotFoundExceptionInterface;
 
