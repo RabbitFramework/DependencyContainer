@@ -27,8 +27,10 @@ class DependencyContainer implements ContainerInterface
         return self::$_instance;
     }
 
-    public function addAlias(string $class, string $alias) {
-        $this->_classAliases[$alias] = $class;
+    public function addAlias(string $class, string ...$alias){
+        foreach ($alias as $as) {
+            $this->_classAliases[$as] = $class;
+        }
     }
 
     public function deleteAlias(string $alias) {
