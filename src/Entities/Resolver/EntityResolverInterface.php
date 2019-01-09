@@ -6,7 +6,7 @@
  * Time: 13:46
  */
 
-namespace Rabbit\DependencyContainer\Entities\Resolver;
+namespace Rabbit\DependencyInjector\Entities\Resolver;
 
 
 interface EntityResolverInterface

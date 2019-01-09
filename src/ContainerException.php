@@ -6,11 +6,11 @@
  * Time: 13:59
  */
 
-namespace Rabbit\DependencyContainer;
+namespace Rabbit\DependencyInjector;
 
 use Psr\Container\ContainerExceptionInterface;
 
-class DependencyContainerException extends \Exception implements ContainerExceptionInterface
+class ContainerException extends \Exception implements ContainerExceptionInterface
 {
 
 }

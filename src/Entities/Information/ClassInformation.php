@@ -6,7 +6,7 @@
  * Time: 12:00
  */
 
-namespace Rabbit\DependencyContainer\Entities\Information;
+namespace Rabbit\DependencyInjector\Entities\Information;
 
 use \ReflectionProperty;
 

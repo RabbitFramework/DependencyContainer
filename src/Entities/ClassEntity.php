@@ -6,13 +6,13 @@
  * Time: 10:30
  */
 
-namespace Rabbit\DependencyContainer\Entities;
+namespace Rabbit\DependencyInjector\Entities;
 
 use Psr\Container\ContainerInterface;
-use Rabbit\DependencyContainer\Entities\Information\ClassInformation;
-use Rabbit\DependencyContainer\Entities\Information\EntityInformationInterface;
-use Rabbit\DependencyContainer\Entities\Resolver\ClassResolver;
-use Xirion\DependencyContainer\DependencyContainerNotFoundException;
+use Rabbit\DependencyInjector\ContainerNotFoundException;
+use Rabbit\DependencyInjector\Entities\Information\ClassInformation;
+use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyInjector\Entities\Resolver\ClassResolver;
 
 class ClassEntity implements EntityInterface
 {
@@ -68,12 +68,12 @@ class ClassEntity implements EntityInterface
                 try {
                     $this->_methodEntities[$methodName] = new MethodEntity(new \ReflectionMethod($this->information->name, $methodName), $this->container, $this);
                 } catch (\ReflectionException $e) {
-                    throw new DependencyContainerNotFoundException("[Rabbit => DependencyContainer->ClassEntity::getMethod()] The method $methodName doesn't exists");
+                    throw new ContainerNotFoundException("[Rabbit => DependencyInjector->ClassEntity::getMethod()] The method $methodName doesn't exists");
                 }
             }
             return $this->_methodEntities[$methodName];
         } else {
-            throw new DependencyContainerNotFoundException("[Rabbit => DependencyContainer->ClassEntity::getMethod()] The method $methodName doesn't exists");
+            throw new ContainerNotFoundException("[Rabbit => DependencyInjector->ClassEntity::getMethod()] The method $methodName doesn't exists");
         }
     }
 

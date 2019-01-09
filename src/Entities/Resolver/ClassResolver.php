@@ -6,10 +6,10 @@
  * Time: 10:31
  */
 
-namespace Rabbit\DependencyContainer\Entities\Resolver;
+namespace Rabbit\DependencyInjector\Entities\Resolver;
 
 use \ReflectionClass;
-use Rabbit\DependencyContainer\Entities\EntityInterface;
+use Rabbit\DependencyInjector\Entities\EntityInterface;
 
 class ClassResolver implements EntityResolverInterface
 {
