@@ -47,7 +47,7 @@ class ClassResolver implements EntityResolverInterface
                 }
                 $constructorParameters[] = ((isset($optParameters[$parameter->getName()]))
                     ? $optParameters[$parameter->getName()]
-                    : (isset($this->_entity->getRule()['constructParameters']) && isset($this->_entity->getClassRule()['constructParameters'][$parameter->getName()])
+                    : (isset($this->_entity->getRule()['constructParameters']) && isset($this->_entity->getRule()['constructParameters'][$parameter->getName()])
                         ? $this->_entity->getRule()['constructParameters'][$parameter->getName()]
                         : ($parameter->getClass()
                             ? $this->_entity->container->get($parameter->getClass()->getName())->getInstance()
