@@ -6,7 +6,7 @@
  * Time: 18:04
  */
 
-namespace Rabbit\DependencyInjector;
+namespace Rabbit\DependencyContainer;
 
 use Psr\Container\NotFoundExceptionInterface;
 

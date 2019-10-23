@@ -6,10 +6,10 @@
  * Time: 08:46
  */
 
-namespace Rabbit\DependencyInjector;
+namespace Rabbit\DependencyContainer;
 
 use Psr\Container\ContainerInterface;
-use Rabbit\DependencyInjector\Entities\ClassEntity;
+use Rabbit\DependencyContainer\Entities\ClassEntity;
 
 class Container implements ContainerInterface
 {
@@ -43,7 +43,7 @@ class Container implements ContainerInterface
             try {
                 $this->_classEntities[$className] = new ClassEntity(new \ReflectionClass($className), $this);
             } catch (\ReflectionException $e) {
-                throw new ContainerNotFoundException("[Rabbit => DependencyInjector::get()] The class $className doesn't exists");
+                throw new ContainerNotFoundException("[Rabbit => DependencyContainer::get()] The class $className doesn't exists");
             }
         }
         return $this->_classEntities[$className];

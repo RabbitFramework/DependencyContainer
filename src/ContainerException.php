@@ -6,7 +6,7 @@
  * Time: 13:59
  */
 
-namespace Rabbit\DependencyInjector;
+namespace Rabbit\DependencyContainer;
 
 use Psr\Container\ContainerExceptionInterface;
 

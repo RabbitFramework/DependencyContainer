@@ -6,18 +6,18 @@
  * Time: 10:32
  */
 
-namespace Rabbit\DependencyInjector\Entities;
+namespace Rabbit\DependencyContainer\Entities;
 
 use Psr\Container\ContainerInterface;
-use Rabbit\DependencyInjector\ContainerException;
-use Rabbit\DependencyInjector\DependencyInjectorInterface;
-use Rabbit\DependencyInjector\Entities\Information\EntityInformationInterface;
-use Rabbit\DependencyInjector\Entities\Information\MethodInformation;
-use Rabbit\DependencyInjector\Entities\Resolver\MethodResolver;
+use Rabbit\DependencyContainer\ContainerException;
+use Rabbit\DependencyContainer\DependencyContainerInterface;
+use Rabbit\DependencyContainer\Entities\Information\EntityInformationInterface;
+use Rabbit\DependencyContainer\Entities\Information\MethodInformation;
+use Rabbit\DependencyContainer\Entities\Resolver\MethodResolver;
 
 /**
  * Class MethodEntity
- * @package Rabbit\DependencyInjector\Entities
+ * @package Rabbit\DependencyContainer\Entities
  */
 class MethodEntity implements EntityInterface
 {
@@ -94,7 +94,7 @@ class MethodEntity implements EntityInterface
      */
     public function execute(array $parameters = [], object $class = null) {
         if(!isset($this->_parentClass) && !isset($class)) {
-            throw new ContainerException('[Rabbit => DependencyInjector->MethodEntity::execute()] the parent class doesn\'t exists, please invoke first before execute a method');
+            throw new ContainerException('[Rabbit => DependencyContainer->MethodEntity::execute()] the parent class doesn\'t exists, please invoke first before execute a method');
         }
         return $this->resolver->setClass($this->_parentClass ?? $class)->get($parameters);
     }

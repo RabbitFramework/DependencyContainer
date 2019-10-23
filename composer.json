@@ -1,5 +1,5 @@
 {
-    "name": "rabbitphp/dependency-injector",
+    "name": "rabbitphp/dependency-container",
     "description": "Dependency container component of rabbitphp framework",
     "type": "component",
     "license": "MIT",
@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Rabbit\\DependencyInjector\\": "src"
+            "Rabbit\\DependencyContainer\\": "src"
         }
     }
 }

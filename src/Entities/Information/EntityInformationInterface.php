@@ -6,7 +6,7 @@
  * Time: 17:52
  */
 
-namespace Rabbit\DependencyInjector\Entities\Information;
+namespace Rabbit\DependencyContainer\Entities\Information;
 
 interface EntityInformationInterface
 {
